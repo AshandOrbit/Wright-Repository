@@ -9,17 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --tiffany: #0ABAB5;
-            --tiffany-light: #5CE1DC;
-            --tiffany-dark: #088F8B;
-            --tiffany-glow: rgba(10, 186, 181, 0.3);
-            --cream: #FDF5E6;
+            --gold: #B8860B;
+            --gold-light: #D4AF37;
+            --gold-dark: #8B6914;
+            --gold-glow: rgba(212, 175, 55, 0.3);
             --champagne: #F7E7CE;
+            --cream: #FDF5E6;
+            --burgundy: #722F37;
+            --burgundy-dark: #4A1C23;
             --noir: #0A0A0A;
             --velvet: #121212;
             --smoke: #1E1E1E;
             --slate: #2A2A2A;
-            --text-muted: #8A9A9A;
+            --text-muted: #9A8F80;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,7 +52,7 @@
         /* Header */
         .header {
             background: linear-gradient(to bottom, var(--noir) 0%, rgba(10,10,10,0.95) 100%);
-            border-bottom: 1px solid var(--tiffany-dark);
+            border-bottom: 1px solid var(--gold-dark);
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
@@ -76,9 +78,9 @@
         .logo {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, var(--tiffany-light) 0%, var(--tiffany) 50%, var(--tiffany-dark) 100%);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
             border-radius: 6px;
-            box-shadow: 0 0 20px var(--tiffany-glow);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
         h1 {
@@ -112,7 +114,7 @@
         }
 
         .nav-btn:hover { color: var(--cream); background: rgba(10,186,181,0.1); }
-        .nav-btn.active { background: var(--tiffany-dark); color: var(--cream); }
+        .nav-btn.active { background: var(--gold-dark); color: var(--cream); }
 
         .user-section {
             display: flex;
@@ -130,7 +132,7 @@
         .user-avatar {
             width: 42px;
             height: 42px;
-            background: linear-gradient(135deg, var(--tiffany-light) 0%, var(--tiffany) 50%, var(--tiffany-dark) 100%);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -140,14 +142,14 @@
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 0 20px var(--tiffany-glow);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
-        .user-avatar:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--tiffany-glow); }
+        .user-avatar:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--gold-glow); }
 
         /* Hero Banner */
         .hero-banner {
-            background: linear-gradient(135deg, var(--noir) 0%, var(--velvet) 40%, var(--slate) 100%);
+            background: linear-gradient(135deg, var(--noir) 0%, var(--velvet) 40%, var(--burgundy-dark) 100%);
             padding: 4rem 2rem;
             position: relative;
             overflow: hidden;
@@ -160,7 +162,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 70% 50%, rgba(10,186,181,0.2) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 70% 50%, rgba(212,175,55,0.15) 0%, transparent 60%);
         }
 
         .hero-banner::after {
@@ -192,7 +194,7 @@
         }
 
         .hero-text p {
-            color: var(--tiffany-light);
+            color: var(--gold-light);
             font-size: 1rem;
             letter-spacing: 0.15em;
             font-weight: 300;
@@ -214,12 +216,12 @@
 
         .hero-stat:hover {
             background: rgba(10,186,181,0.1);
-            border-color: var(--tiffany-dark);
+            border-color: var(--gold-dark);
         }
 
         .hero-stat-value {
             font-family: 'Cormorant Garamond', serif;
-            color: var(--tiffany-light);
+            color: var(--gold-light);
             font-size: 2rem;
             font-weight: 400;
         }
@@ -257,7 +259,7 @@
 
         .primary-btn {
             padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, var(--tiffany) 0%, var(--tiffany-dark) 100%);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
             border: none;
             border-radius: 4px;
             color: var(--noir);
@@ -267,21 +269,21 @@
             transition: all 0.3s;
         }
 
-        .primary-btn:hover { box-shadow: 0 0 30px var(--tiffany-glow); }
+        .primary-btn:hover { box-shadow: 0 0 30px var(--gold-glow); }
 
         .secondary-btn {
             padding: 0.75rem 1.5rem;
             background: transparent;
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 4px;
-            color: var(--tiffany-light);
+            color: var(--gold-light);
             font-weight: 500;
             cursor: pointer;
             font-size: 0.875rem;
             transition: all 0.3s;
         }
 
-        .secondary-btn:hover { background: rgba(10,186,181,0.1); border-color: var(--tiffany); }
+        .secondary-btn:hover { background: rgba(10,186,181,0.1); border-color: var(--gold); }
 
         /* Featured Heirloom */
         .featured-heirloom {
@@ -289,7 +291,7 @@
             grid-template-columns: 1fr 1.2fr;
             gap: 4rem;
             background: linear-gradient(135deg, var(--velvet) 0%, var(--smoke) 100%);
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 16px;
             padding: 3rem;
             margin-bottom: 3rem;
@@ -306,13 +308,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 30% 50%, rgba(10,186,181,0.1) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.08) 0%, transparent 60%);
             pointer-events: none;
         }
 
         .featured-heirloom:hover {
-            border-color: var(--tiffany);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--tiffany-glow);
+            border-color: var(--gold);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--gold-glow);
         }
 
         .featured-heirloom-image {
@@ -333,7 +335,7 @@
             position: absolute;
             width: 300px;
             height: 300px;
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 50%;
             opacity: 0.3;
             animation: rotate 40s linear infinite;
@@ -354,8 +356,8 @@
         .featured-heirloom-badge {
             display: inline-block;
             background: transparent;
-            border: 1px solid var(--tiffany);
-            color: var(--tiffany-light);
+            border: 1px solid var(--gold);
+            color: var(--gold-light);
             padding: 0.25rem 0.75rem;
             border-radius: 2px;
             font-size: 0.7rem;
@@ -377,7 +379,7 @@
         .featured-heirloom-subtitle {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
-            color: var(--tiffany-light);
+            color: var(--gold-light);
             font-style: italic;
             margin-bottom: 2rem;
         }
@@ -388,7 +390,7 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
             padding-bottom: 2rem;
-            border-bottom: 1px solid var(--tiffany-dark);
+            border-bottom: 1px solid var(--gold-dark);
         }
 
         .fh-meta-item {}
@@ -409,14 +411,14 @@
         /* Legacy Package */
         .legacy-package {
             background: rgba(10,186,181,0.05);
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 8px;
             padding: 1.5rem;
         }
 
         .legacy-package-title {
             font-size: 0.75rem;
-            color: var(--tiffany-light);
+            color: var(--gold-light);
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 1rem;
@@ -446,8 +448,8 @@
             font-size: 0.75rem;
         }
 
-        .legacy-item-icon.complete { color: var(--tiffany-light); }
-        .legacy-item-icon.progress { color: var(--tiffany); }
+        .legacy-item-icon.complete { color: var(--gold-light); }
+        .legacy-item-icon.progress { color: var(--gold); }
         .legacy-item-icon.pending { color: var(--text-muted); }
 
         .legacy-item-text {
@@ -471,7 +473,7 @@
 
         .metric-card {
             background: linear-gradient(135deg, var(--velvet) 0%, var(--smoke) 100%);
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 12px;
             padding: 1.5rem;
             cursor: pointer;
@@ -479,8 +481,8 @@
         }
 
         .metric-card:hover {
-            border-color: var(--tiffany);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 20px var(--tiffany-glow);
+            border-color: var(--gold);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 20px var(--gold-glow);
             transform: translateY(-2px);
         }
 
@@ -497,7 +499,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
             font-weight: 400;
-            color: var(--tiffany-light);
+            color: var(--gold-light);
         }
 
         /* Family Grid */
@@ -509,7 +511,7 @@
 
         .family-card {
             background: var(--velvet);
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
@@ -517,14 +519,14 @@
         }
 
         .family-card:hover {
-            border-color: var(--tiffany);
+            border-color: var(--gold);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .family-avatar {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--tiffany) 0%, var(--tiffany-dark) 100%);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -562,7 +564,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, var(--tiffany), var(--tiffany-dark), transparent);
+            background: linear-gradient(to bottom, var(--gold-light), var(--burgundy), var(--gold-dark), transparent);
         }
 
         .timeline-item {
@@ -577,21 +579,21 @@
             top: 0.25rem;
             width: 12px;
             height: 12px;
-            background: var(--tiffany);
+            background: var(--gold);
             border-radius: 50%;
             transform: translateX(-5px);
-            box-shadow: 0 0 15px var(--tiffany-glow);
+            box-shadow: 0 0 15px var(--gold-glow);
         }
 
         .timeline-item.pending::before {
             background: var(--smoke);
-            border: 2px solid var(--tiffany-dark);
+            border: 2px solid var(--gold-dark);
             box-shadow: none;
         }
 
         .timeline-date {
             font-size: 0.7rem;
-            color: var(--tiffany-light);
+            color: var(--gold-light);
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 0.25rem;
@@ -619,7 +621,7 @@
 
         .service-card {
             background: linear-gradient(135deg, var(--velvet) 0%, var(--smoke) 100%);
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 12px;
             padding: 2rem;
             text-align: center;
@@ -628,8 +630,8 @@
         }
 
         .service-card:hover {
-            border-color: var(--tiffany);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3), 0 0 30px var(--tiffany-glow);
+            border-color: var(--gold);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3), 0 0 30px var(--gold-glow);
         }
 
         .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
@@ -652,19 +654,19 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
             font-weight: 500;
-            color: var(--tiffany-light);
+            color: var(--gold-light);
         }
 
         .service-included {
             font-size: 0.75rem;
-            color: var(--tiffany);
+            color: var(--gold);
             margin-top: 0.5rem;
         }
 
         /* Footer */
         .footer {
             background: var(--noir);
-            border-top: 1px solid var(--tiffany-dark);
+            border-top: 1px solid var(--gold-dark);
             padding: 3rem 2rem;
             text-align: center;
         }
@@ -693,7 +695,7 @@
 
         .modal {
             background: var(--velvet);
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 16px;
             max-width: 600px;
             width: 90%;
@@ -703,7 +705,7 @@
 
         .modal-header {
             padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--tiffany-dark);
+            border-bottom: 1px solid var(--gold-dark);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -719,7 +721,7 @@
         .modal-close {
             width: 36px;
             height: 36px;
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             background: transparent;
             border-radius: 50%;
             cursor: pointer;
@@ -728,14 +730,14 @@
             transition: all 0.3s;
         }
 
-        .modal-close:hover { border-color: var(--tiffany); color: var(--cream); }
+        .modal-close:hover { border-color: var(--gold); color: var(--cream); }
 
         .modal-body { padding: 2rem; }
         .modal-body p { margin-bottom: 1rem; color: var(--text-muted); line-height: 1.7; }
 
         .modal-footer {
             padding: 1.5rem 2rem;
-            border-top: 1px solid var(--tiffany-dark);
+            border-top: 1px solid var(--gold-dark);
             display: flex;
             gap: 1rem;
             justify-content: flex-end;
@@ -755,7 +757,7 @@
         .form-input {
             width: 100%;
             padding: 0.75rem 1rem;
-            border: 1px solid var(--tiffany-dark);
+            border: 1px solid var(--gold-dark);
             border-radius: 4px;
             font-size: 1rem;
             background: var(--smoke);
@@ -763,7 +765,7 @@
             transition: border-color 0.3s;
         }
 
-        .form-input:focus { outline: none; border-color: var(--tiffany); }
+        .form-input:focus { outline: none; border-color: var(--gold); }
         .form-input::placeholder { color: var(--text-muted); }
 
         /* Responsive */
@@ -863,7 +865,7 @@
                         </div>
                         <div class="fh-meta-item">
                             <div class="fh-meta-label">Certification</div>
-                            <div class="fh-meta-value" style="color: var(--tiffany-light);">In Progress</div>
+                            <div class="fh-meta-value" style="color: var(--gold-light);">In Progress</div>
                         </div>
                     </div>
 
