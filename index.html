@@ -4,30 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextHeir - Wright Thurston Legacy Vault</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --tiffany: #0ABAB5;
+            --tiffany-light: #5CE1DC;
+            --tiffany-dark: #088F8B;
+            --tiffany-glow: rgba(10, 186, 181, 0.3);
+            --cream: #FDF5E6;
+            --champagne: #F7E7CE;
+            --noir: #0A0A0A;
+            --velvet: #121212;
+            --smoke: #1E1E1E;
+            --slate: #2A2A2A;
+            --text-muted: #8A9A9A;
         }
 
-        body {
-            font-family: Georgia, 'Times New Roman', serif;
-            background: #FAF8F3;
-            color: #3E3E3E;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: var(--noir); 
+            color: var(--cream); 
+            line-height: 1.6;
         }
 
-        .sans {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        /* Subtle grain */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
         }
 
+        .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+        /* Header */
         .header {
-            background: white;
-            border-bottom: 1px solid #E8E3D8;
+            background: linear-gradient(to bottom, var(--noir) 0%, rgba(10,10,10,0.95) 100%);
+            border-bottom: 1px solid var(--tiffany-dark);
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
         .header-content {
@@ -48,102 +76,104 @@
         .logo {
             width: 36px;
             height: 36px;
-            background: #0ABAB5;
+            background: linear-gradient(135deg, var(--tiffany-light) 0%, var(--tiffany) 50%, var(--tiffany-dark) 100%);
             border-radius: 6px;
+            box-shadow: 0 0 20px var(--tiffany-glow);
         }
 
         h1 {
-            color: #3E3E3E;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--cream);
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 400;
+            letter-spacing: 0.1em;
         }
 
         .subtitle {
-            font-size: 0.75rem;
-            color: #5A5A5A;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
         }
+
+        .nav { display: flex; gap: 0.5rem; }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: all 0.3s;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-btn:hover { color: var(--cream); background: rgba(10,186,181,0.1); }
+        .nav-btn.active { background: var(--tiffany-dark); color: var(--cream); }
 
         .user-section {
             display: flex;
             align-items: center;
             gap: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
 
         .user-greeting {
-            color: #3E3E3E;
+            color: var(--text-muted);
             font-size: 0.875rem;
         }
 
-        .user-name {
-            font-weight: 600;
-        }
+        .user-name { color: var(--cream); font-weight: 500; }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #0ABAB5 0%, #088F8B 100%);
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--tiffany-light) 0%, var(--tiffany) 50%, var(--tiffany-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--noir);
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px var(--tiffany-glow);
         }
 
-        .user-avatar:hover {
-            transform: scale(1.05);
-        }
+        .user-avatar:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--tiffany-glow); }
 
-        .nav {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .nav-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 8px;
-            background: transparent;
-            color: #5A5A5A;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        }
-
-        .nav-btn:hover {
-            background: #F5F3EE;
-        }
-
-        .nav-btn.active {
-            background: #0ABAB5;
-            color: white;
-        }
-
-        /* WELCOME BANNER */
-        .welcome-banner {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            padding: 2rem;
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--noir) 0%, var(--velvet) 40%, var(--slate) 100%);
+            padding: 4rem 2rem;
             position: relative;
             overflow: hidden;
         }
 
-        .welcome-banner::before {
+        .hero-banner::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 70% 50%, rgba(10, 186, 181, 0.15) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 70% 50%, rgba(10,186,181,0.2) 0%, transparent 60%);
         }
 
-        .welcome-content {
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--noir) 0%, transparent 100%);
+        }
+
+        .hero-content {
             max-width: 1400px;
             margin: 0 auto;
             position: relative;
@@ -153,497 +183,373 @@
             align-items: center;
         }
 
-        .welcome-text h2 {
-            color: white;
-            font-size: 1.75rem;
+        .hero-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--cream);
+            font-size: 2.5rem;
+            font-weight: 300;
             margin-bottom: 0.5rem;
         }
 
-        .welcome-text p {
-            color: #0ABAB5;
+        .hero-text p {
+            color: var(--tiffany-light);
             font-size: 1rem;
+            letter-spacing: 0.15em;
+            font-weight: 300;
         }
 
-        .welcome-stats {
+        .hero-stats {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
         }
 
-        .welcome-stat {
+        .hero-stat {
             text-align: center;
             cursor: pointer;
-            padding: 0.5rem 1rem;
+            padding: 1rem 1.5rem;
             border-radius: 8px;
-            transition: background 0.2s;
+            transition: all 0.3s;
+            border: 1px solid transparent;
         }
 
-        .welcome-stat:hover {
-            background: rgba(255,255,255,0.1);
+        .hero-stat:hover {
+            background: rgba(10,186,181,0.1);
+            border-color: var(--tiffany-dark);
         }
 
-        .welcome-stat-value {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
+        .hero-stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--tiffany-light);
+            font-size: 2rem;
+            font-weight: 400;
         }
 
-        .welcome-stat-label {
-            color: #888;
-            font-size: 0.75rem;
+        .hero-stat-label {
+            color: var(--text-muted);
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            letter-spacing: 0.15em;
         }
 
+        /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
 
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .metric-card {
-            background: white;
-            border: 1px solid #E8E3D8;
-            border-radius: 12px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .metric-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-
-        .metric-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-label {
-            color: #5A5A5A;
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        }
-
-        .metric-value {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: #3E3E3E;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #3E3E3E;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: var(--cream);
         }
 
         .primary-btn {
-            padding: 0.625rem 1.25rem;
-            background: #0ABAB5;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--tiffany) 0%, var(--tiffany-dark) 100%);
             border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
+            border-radius: 4px;
+            color: var(--noir);
+            font-weight: 600;
             cursor: pointer;
             font-size: 0.875rem;
-            transition: all 0.2s;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            transition: all 0.3s;
         }
 
-        .primary-btn:hover {
-            background: #088F8B;
-            transform: translateY(-1px);
-        }
+        .primary-btn:hover { box-shadow: 0 0 30px var(--tiffany-glow); }
 
         .secondary-btn {
-            padding: 0.625rem 1.25rem;
-            background: white;
-            border: 1px solid #E8E3D8;
-            border-radius: 8px;
-            color: #3E3E3E;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--tiffany-dark);
+            border-radius: 4px;
+            color: var(--tiffany-light);
             font-weight: 500;
             cursor: pointer;
             font-size: 0.875rem;
-            transition: all 0.2s;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            transition: all 0.3s;
         }
 
-        .secondary-btn:hover {
-            background: #F5F3EE;
-        }
+        .secondary-btn:hover { background: rgba(10,186,181,0.1); border-color: var(--tiffany); }
 
-        /* FEATURED HEIRLOOM */
+        /* Featured Heirloom */
         .featured-heirloom {
-            background: white;
-            border: 2px solid #0ABAB5;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 2rem;
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            background: linear-gradient(135deg, var(--velvet) 0%, var(--smoke) 100%);
+            border: 1px solid var(--tiffany-dark);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-heirloom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(10,186,181,0.1) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .featured-heirloom:hover {
-            box-shadow: 0 8px 24px rgba(10, 186, 181, 0.2);
+            border-color: var(--tiffany);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--tiffany-glow);
         }
 
         .featured-heirloom-image {
-            background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            position: relative;
         }
 
         .featured-heirloom-image img {
             max-width: 100%;
-            border-radius: 8px;
-            transition: transform 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
 
-        .featured-heirloom:hover .featured-heirloom-image img {
-            transform: scale(1.02);
+        .featured-heirloom-image::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid var(--tiffany-dark);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: rotate 40s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .featured-heirloom-info {
-            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
         }
 
         .featured-heirloom-badge {
             display: inline-block;
-            background: #0ABAB5;
-            color: white;
+            background: transparent;
+            border: 1px solid var(--tiffany);
+            color: var(--tiffany-light);
             padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            border-radius: 2px;
+            font-size: 0.7rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.2em;
             margin-bottom: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            width: fit-content;
         }
 
         .featured-heirloom-title {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: #3E3E3E;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--cream);
             margin-bottom: 0.5rem;
         }
 
         .featured-heirloom-subtitle {
-            color: #0ABAB5;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--tiffany-light);
             font-style: italic;
+            margin-bottom: 2rem;
         }
 
         .featured-heirloom-meta {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--tiffany-dark);
         }
 
-        .fh-meta-item {
-            text-align: left;
-        }
-
+        .fh-meta-item {}
         .fh-meta-label {
-            font-size: 0.7rem;
-            color: #888;
+            font-size: 0.65rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.15em;
             margin-bottom: 0.25rem;
         }
 
         .fh-meta-value {
-            font-size: 1rem;
-            color: #3E3E3E;
-            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--cream);
         }
 
-        /* LEGACY PACKAGE STATUS */
+        /* Legacy Package */
         .legacy-package {
-            background: #f9f9f7;
-            border-radius: 12px;
+            background: rgba(10,186,181,0.05);
+            border: 1px solid var(--tiffany-dark);
+            border-radius: 8px;
             padding: 1.5rem;
-            margin-top: 1rem;
         }
 
         .legacy-package-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #3E3E3E;
+            font-size: 0.75rem;
+            color: var(--tiffany-light);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             margin-bottom: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-weight: 500;
         }
 
-        .legacy-items {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
+        .legacy-items { display: flex; flex-direction: column; gap: 0.75rem; }
 
         .legacy-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            gap: 0.75rem;
             padding: 0.5rem;
-            border-radius: 6px;
+            border-radius: 4px;
+            transition: all 0.2s;
             cursor: pointer;
-            transition: background 0.2s;
         }
 
-        .legacy-item:hover {
-            background: rgba(10, 186, 181, 0.1);
-        }
+        .legacy-item:hover { background: rgba(10,186,181,0.1); }
 
         .legacy-item-icon {
             width: 20px;
             height: 20px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
         }
 
-        .legacy-item-icon.complete {
-            background: #7D9B76;
-            color: white;
-        }
-
-        .legacy-item-icon.progress {
-            background: #0ABAB5;
-            color: white;
-        }
-
-        .legacy-item-icon.pending {
-            background: #E8E3D8;
-            color: #888;
-        }
+        .legacy-item-icon.complete { color: var(--tiffany-light); }
+        .legacy-item-icon.progress { color: var(--tiffany); }
+        .legacy-item-icon.pending { color: var(--text-muted); }
 
         .legacy-item-text {
-            color: #3E3E3E;
+            flex: 1;
+            font-size: 0.875rem;
+            color: var(--cream);
         }
 
         .legacy-item-status {
-            margin-left: auto;
             font-size: 0.75rem;
-            color: #888;
+            color: var(--text-muted);
         }
 
-        /* FAMILY SECTION */
-        .family-grid {
+        /* Metrics Grid */
+        .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        .family-member {
-            background: white;
-            border: 1px solid #E8E3D8;
+        .metric-card {
+            background: linear-gradient(135deg, var(--velvet) 0%, var(--smoke) 100%);
+            border: 1px solid var(--tiffany-dark);
             border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
+            padding: 1.5rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
         }
 
-        .family-member:hover {
-            border-color: #0ABAB5;
-            box-shadow: 0 4px 12px rgba(10, 186, 181, 0.15);
+        .metric-card:hover {
+            border-color: var(--tiffany);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 20px var(--tiffany-glow);
             transform: translateY(-2px);
         }
 
+        .metric-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--tiffany-light);
+        }
+
+        /* Family Grid */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .family-card {
+            background: var(--velvet);
+            border: 1px solid var(--tiffany-dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .family-card:hover {
+            border-color: var(--tiffany);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
         .family-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #E8E3D8 0%, #d5cfc3 100%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--tiffany) 0%, var(--tiffany-dark) 100%);
             border-radius: 50%;
-            margin: 0 auto 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 1rem;
             font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--noir);
         }
 
         .family-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #3E3E3E;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
             margin-bottom: 0.25rem;
         }
 
         .family-relation {
             font-size: 0.75rem;
-            color: #888;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .footer {
-            background: white;
-            border-top: 1px solid #E8E3D8;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .footer-text {
-            color: #5A5A5A;
-            font-style: italic;
-            font-size: 0.875rem;
-        }
-
-        /* MODAL */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: white;
-            border-radius: 16px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid #E8E3D8;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #3E3E3E;
-        }
-
-        .modal-close {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: #F5F3EE;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.25rem;
-            color: #5A5A5A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .modal-close:hover {
-            background: #E8E3D8;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .modal-body p {
-            margin-bottom: 1rem;
-            color: #5A5A5A;
-            line-height: 1.6;
-        }
-
-        .modal-footer {
-            padding: 1.5rem;
-            border-top: 1px solid #E8E3D8;
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-
-        /* FORM STYLES */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #3E3E3E;
-            margin-bottom: 0.5rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #E8E3D8;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: Georgia, serif;
-            transition: border-color 0.2s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #0ABAB5;
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #E8E3D8;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: white;
-            cursor: pointer;
-        }
-
-        /* TIMELINE TAB */
+        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 2rem;
@@ -656,12 +562,12 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: #E8E3D8;
+            background: linear-gradient(to bottom, var(--tiffany), var(--tiffany-dark), transparent);
         }
 
         .timeline-item {
             position: relative;
-            padding-bottom: 2rem;
+            padding-bottom: 2.5rem;
         }
 
         .timeline-item::before {
@@ -671,37 +577,40 @@
             top: 0.25rem;
             width: 12px;
             height: 12px;
-            background: #0ABAB5;
+            background: var(--tiffany);
             border-radius: 50%;
             transform: translateX(-5px);
+            box-shadow: 0 0 15px var(--tiffany-glow);
         }
 
         .timeline-item.pending::before {
-            background: #E8E3D8;
+            background: var(--smoke);
+            border: 2px solid var(--tiffany-dark);
+            box-shadow: none;
         }
 
         .timeline-date {
-            font-size: 0.75rem;
-            color: #888;
+            font-size: 0.7rem;
+            color: var(--tiffany-light);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.15em;
             margin-bottom: 0.25rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
 
         .timeline-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #3E3E3E;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--cream);
             margin-bottom: 0.25rem;
         }
 
         .timeline-desc {
             font-size: 0.875rem;
-            color: #5A5A5A;
+            color: var(--text-muted);
         }
 
-        /* SERVICES TAB */
+        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -709,100 +618,178 @@
         }
 
         .service-card {
-            background: white;
-            border: 1px solid #E8E3D8;
+            background: linear-gradient(135deg, var(--velvet) 0%, var(--smoke) 100%);
+            border: 1px solid var(--tiffany-dark);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
         }
 
         .service-card:hover {
-            border-color: #0ABAB5;
-            box-shadow: 0 4px 12px rgba(10, 186, 181, 0.15);
+            border-color: var(--tiffany);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3), 0 0 30px var(--tiffany-glow);
         }
 
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
+        .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
 
         .service-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #3E3E3E;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--cream);
             margin-bottom: 0.5rem;
         }
 
         .service-desc {
             font-size: 0.875rem;
-            color: #5A5A5A;
+            color: var(--text-muted);
             margin-bottom: 1rem;
         }
 
         .service-price {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #0ABAB5;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--tiffany-light);
         }
 
         .service-included {
-            background: rgba(10, 186, 181, 0.1);
-            color: #0ABAB5;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
             font-size: 0.75rem;
-            font-weight: 600;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            color: var(--tiffany);
+            margin-top: 0.5rem;
         }
 
-        /* HEIRLOOM DETAIL MODAL */
-        .heirloom-detail-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+        /* Footer */
+        .footer {
+            background: var(--noir);
+            border-top: 1px solid var(--tiffany-dark);
+            padding: 3rem 2rem;
+            text-align: center;
         }
 
-        .heirloom-detail-meta {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--velvet);
+            border: 1px solid var(--tiffany-dark);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--tiffany-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--cream);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--tiffany-dark);
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover { border-color: var(--tiffany); color: var(--cream); }
+
+        .modal-body { padding: 2rem; }
+        .modal-body p { margin-bottom: 1rem; color: var(--text-muted); line-height: 1.7; }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--tiffany-dark);
+            display: flex;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            justify-content: flex-end;
         }
 
-        .heirloom-detail-item {
-            background: #f9f9f7;
-            padding: 1rem;
-            border-radius: 8px;
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
         }
 
-        .heirloom-detail-label {
-            font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
-            margin-bottom: 0.25rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        }
-
-        .heirloom-detail-value {
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--tiffany-dark);
+            border-radius: 4px;
             font-size: 1rem;
-            font-weight: 600;
-            color: #3E3E3E;
+            background: var(--smoke);
+            color: var(--cream);
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus { outline: none; border-color: var(--tiffany); }
+        .form-input::placeholder { color: var(--text-muted); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .featured-heirloom { grid-template-columns: 1fr; }
+            .hero-content { flex-direction: column; gap: 2rem; text-align: center; }
+            .hero-stats { justify-content: center; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .metrics-grid { grid-template-columns: 1fr; }
+            .nav { display: none; }
+            .hero-stats { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="header">
         <div class="header-content">
-            <div class="logo-section" onclick="switchTab('vault')" style="cursor:pointer">
+            <div class="logo-section" onclick="window.location.href='index.html'">
                 <div class="logo"></div>
                 <div>
                     <h1>NextHeir</h1>
-                    <div class="subtitle sans">Digital Legacy Preservation</div>
+                    <div class="subtitle">Digital Legacy Preservation</div>
                 </div>
             </div>
             <div class="nav">
@@ -818,25 +805,25 @@
         </div>
     </div>
 
-    <!-- Welcome Banner -->
-    <div class="welcome-banner">
-        <div class="welcome-content">
-            <div class="welcome-text">
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-text">
                 <h2>The Thurston Legacy Vault</h2>
                 <p>White Glove Collection • Est. 2026</p>
             </div>
-            <div class="welcome-stats">
-                <div class="welcome-stat" onclick="switchTab('vault')">
-                    <div class="welcome-stat-value">$1.5M+</div>
-                    <div class="welcome-stat-label">Total Value</div>
+            <div class="hero-stats">
+                <div class="hero-stat" onclick="switchTab('vault')">
+                    <div class="hero-stat-value">$1.5M+</div>
+                    <div class="hero-stat-label">Total Value</div>
                 </div>
-                <div class="welcome-stat" onclick="switchTab('vault')">
-                    <div class="welcome-stat-value">1</div>
-                    <div class="welcome-stat-label">Certified</div>
+                <div class="hero-stat" onclick="switchTab('vault')">
+                    <div class="hero-stat-value">1</div>
+                    <div class="hero-stat-label">Certified</div>
                 </div>
-                <div class="welcome-stat" onclick="switchTab('family')">
-                    <div class="welcome-stat-value">18</div>
-                    <div class="welcome-stat-label">Family Members</div>
+                <div class="hero-stat" onclick="switchTab('family')">
+                    <div class="hero-stat-value">18</div>
+                    <div class="hero-stat-label">Family Members</div>
                 </div>
             </div>
         </div>
@@ -854,7 +841,7 @@
 
             <div class="featured-heirloom" onclick="openModal('heirloom-detail-modal')">
                 <div class="featured-heirloom-image">
-                    <img src="dean_martin_ring.png" alt="Tiffany Diamond Ring">
+                    <img src="thurston_ring.jpg" alt="Tiffany Diamond Ring">
                 </div>
                 <div class="featured-heirloom-info">
                     <div class="featured-heirloom-badge">White Glove • In Certification</div>
@@ -876,7 +863,7 @@
                         </div>
                         <div class="fh-meta-item">
                             <div class="fh-meta-label">Certification</div>
-                            <div class="fh-meta-value" style="color: #0ABAB5;">In Progress</div>
+                            <div class="fh-meta-value" style="color: var(--tiffany-light);">In Progress</div>
                         </div>
                     </div>
 
@@ -949,66 +936,50 @@
         <!-- FAMILY TAB -->
         <div class="tab-content" id="family-tab">
             <div class="section-header">
-                <h2 class="section-title">Family Vault Access</h2>
+                <h2 class="section-title">Family Access</h2>
                 <button class="primary-btn" onclick="openModal('invite-modal')">+ Invite Family</button>
             </div>
 
             <div class="family-grid">
-                <div class="family-member" onclick="openModal('family-member-modal')">
-                    <div class="family-avatar">👩</div>
-                    <div class="family-name">Wife</div>
-                    <div class="family-relation">Spouse • Full Access</div>
+                <div class="family-card">
+                    <div class="family-avatar">WT</div>
+                    <div class="family-name">Wright Thurston</div>
+                    <div class="family-relation">Owner</div>
                 </div>
-                <div class="family-member" onclick="openModal('family-member-modal')">
-                    <div class="family-avatar">👦</div>
-                    <div class="family-name">Son 1</div>
-                    <div class="family-relation">Child • Full Access</div>
+                <div class="family-card">
+                    <div class="family-avatar">ST</div>
+                    <div class="family-name">Spouse</div>
+                    <div class="family-relation">Co-Owner</div>
                 </div>
-                <div class="family-member" onclick="openModal('family-member-modal')">
-                    <div class="family-avatar">👧</div>
-                    <div class="family-name">Daughter 1</div>
-                    <div class="family-relation">Child • Full Access</div>
+                <div class="family-card">
+                    <div class="family-avatar">C1</div>
+                    <div class="family-name">Child</div>
+                    <div class="family-relation">Beneficiary</div>
                 </div>
-                <div class="family-member" onclick="openModal('family-member-modal')">
-                    <div class="family-avatar">👦</div>
-                    <div class="family-name">Son 2</div>
-                    <div class="family-relation">Child • Full Access</div>
+                <div class="family-card">
+                    <div class="family-avatar">C2</div>
+                    <div class="family-name">Child</div>
+                    <div class="family-relation">Beneficiary</div>
                 </div>
-                <div class="family-member" onclick="openModal('family-member-modal')">
-                    <div class="family-avatar">👧</div>
-                    <div class="family-name">Daughter 2</div>
-                    <div class="family-relation">Child • Full Access</div>
+                <div class="family-card">
+                    <div class="family-avatar">C3</div>
+                    <div class="family-name">Child</div>
+                    <div class="family-relation">Beneficiary</div>
                 </div>
-                <div class="family-member" onclick="openModal('invite-modal')" style="border-style: dashed;">
-                    <div class="family-avatar" style="background: #f5f5f5;">+</div>
-                    <div class="family-name">13 Grandchildren</div>
-                    <div class="family-relation">Tap to add</div>
+                <div class="family-card">
+                    <div class="family-avatar">C4</div>
+                    <div class="family-name">Child</div>
+                    <div class="family-relation">Beneficiary</div>
                 </div>
-            </div>
-
-            <div class="section-header">
-                <h2 class="section-title">Access Settings</h2>
-            </div>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-icon">👁️</div>
-                    <div class="metric-label">View Only</div>
-                    <div class="metric-value">13</div>
+                <div class="family-card">
+                    <div class="family-avatar">C5</div>
+                    <div class="family-name">Child</div>
+                    <div class="family-relation">Beneficiary</div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-icon">✏️</div>
-                    <div class="metric-label">Can Edit</div>
-                    <div class="metric-value">5</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon">👑</div>
-                    <div class="metric-label">Admins</div>
-                    <div class="metric-value">2</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon">📧</div>
-                    <div class="metric-label">Pending Invites</div>
-                    <div class="metric-value">0</div>
+                <div class="family-card" style="border-style: dashed; opacity: 0.7;">
+                    <div class="family-avatar" style="background: var(--smoke); color: var(--text-muted);">+13</div>
+                    <div class="family-name">Grandchildren</div>
+                    <div class="family-relation">Pending Invite</div>
                 </div>
             </div>
         </div>
@@ -1016,39 +987,29 @@
         <!-- TIMELINE TAB -->
         <div class="tab-content" id="timeline-tab">
             <div class="section-header">
-                <h2 class="section-title">Legacy Timeline</h2>
+                <h2 class="section-title">Certification Timeline</h2>
             </div>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">December 2025</div>
-                    <div class="timeline-title">Vault Created</div>
-                    <div class="timeline-desc">The Thurston Legacy Vault was established on NextHeir.</div>
+                    <div class="timeline-date">December 2024</div>
+                    <div class="timeline-title">Initial Consultation</div>
+                    <div class="timeline-desc">White glove service agreement signed. Provenance research initiated.</div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">December 2025</div>
-                    <div class="timeline-title">Tiffany Diamond Added</div>
-                    <div class="timeline-desc">First heirloom registered for certification.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">December 2025</div>
-                    <div class="timeline-title">Provenance Research Begins</div>
-                    <div class="timeline-desc">Documentation gathering in progress.</div>
+                    <div class="timeline-date">January 2025</div>
+                    <div class="timeline-title">Documentation Phase</div>
+                    <div class="timeline-desc">Tiffany & Co. records verified. Historical authentication in progress.</div>
                 </div>
                 <div class="timeline-item pending">
-                    <div class="timeline-date">January 2026</div>
+                    <div class="timeline-date">February 2025</div>
                     <div class="timeline-title">Studio Interview</div>
-                    <div class="timeline-desc">Scheduled story capture session with Paul.</div>
-                </div>
-                <div class="timeline-item pending">
-                    <div class="timeline-date">January 2026</div>
-                    <div class="timeline-title">Heritage Documentary</div>
-                    <div class="timeline-desc">Video production of legacy story.</div>
+                    <div class="timeline-desc">Professional video capture of Wright & family stories.</div>
                 </div>
                 <div class="timeline-item pending">
                     <div class="timeline-date">February 14, 2026</div>
-                    <div class="timeline-title">Certificate Minted</div>
-                    <div class="timeline-desc">Blockchain verification complete. Valentine's Day launch.</div>
+                    <div class="timeline-title">Valentine's Day Launch</div>
+                    <div class="timeline-desc">Public platform launch. Blockchain certificate minted.</div>
                 </div>
             </div>
         </div>
@@ -1056,104 +1017,74 @@
         <!-- SERVICES TAB -->
         <div class="tab-content" id="services-tab">
             <div class="section-header">
-                <h2 class="section-title">Available Services</h2>
+                <h2 class="section-title">Additional Services</h2>
             </div>
 
             <div class="services-grid">
-                <div class="service-card" onclick="openModal('service-modal')">
+                <div class="service-card">
                     <div class="service-icon">📝</div>
-                    <div class="service-title">Story Capture</div>
-                    <div class="service-desc">Professional written narrative of your heirloom's journey.</div>
-                    <div class="service-included">Included in Package</div>
+                    <div class="service-title">Professional Story Writing</div>
+                    <div class="service-desc">Our writers craft your heirloom's narrative with care and elegance.</div>
+                    <div class="service-price">$199</div>
                 </div>
-                <div class="service-card" onclick="openModal('service-modal')">
+                <div class="service-card">
                     <div class="service-icon">🎥</div>
-                    <div class="service-title">Studio Interview</div>
-                    <div class="service-desc">In-person video recording session capturing your story.</div>
-                    <div class="service-included">Included in Package</div>
+                    <div class="service-title">Video Memory Capture</div>
+                    <div class="service-desc">Professional studio session to record your stories on film.</div>
+                    <div class="service-price">$299</div>
+                    <div class="service-included">Included in White Glove</div>
                 </div>
-                <div class="service-card" onclick="openModal('service-modal')">
-                    <div class="service-icon">🎬</div>
-                    <div class="service-title">Heritage Documentary</div>
-                    <div class="service-desc">60-90 second museum-quality documentary.</div>
-                    <div class="service-included">Included in Package</div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <div class="service-title">Custom Vault Design</div>
+                    <div class="service-desc">Personalized branding and design for your family vault.</div>
+                    <div class="service-price">$149</div>
                 </div>
-                <div class="service-card" onclick="openModal('service-modal')">
+                <div class="service-card">
+                    <div class="service-icon">💎</div>
+                    <div class="service-title">Expert Appraisal</div>
+                    <div class="service-desc">Certified appraisal from our network of specialists.</div>
+                    <div class="service-price">$99</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌳</div>
+                    <div class="service-title">Family Tree Integration</div>
+                    <div class="service-desc">Connect your heirlooms to your complete family history.</div>
+                    <div class="service-price">$179</div>
+                </div>
+                <div class="service-card">
                     <div class="service-icon">🎙️</div>
                     <div class="service-title">Voice of Memory</div>
-                    <div class="service-desc">Audio keepsake preserving the voice behind the story.</div>
-                    <div class="service-included">Included in Package</div>
-                </div>
-                <div class="service-card" onclick="openModal('service-modal')">
-                    <div class="service-icon">🔗</div>
-                    <div class="service-title">Blockchain Certificate</div>
-                    <div class="service-desc">Permanent, verifiable provenance on the blockchain.</div>
-                    <div class="service-included">Included in Package</div>
-                </div>
-                <div class="service-card" onclick="openModal('service-modal')">
-                    <div class="service-icon">🖼️</div>
-                    <div class="service-title">Photo Restoration</div>
-                    <div class="service-desc">Archival restoration of historical photographs.</div>
-                    <div class="service-price">$100 - $400</div>
+                    <div class="service-desc">AI voice synthesis preserving your loved one's voice forever.</div>
+                    <div class="service-price">$249</div>
+                    <div class="service-included">Included in White Glove</div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- Footer -->
     <div class="footer">
-        <p class="footer-text">
-            The Thurston Legacy • Preserved Forever on NextHeir
-        </p>
+        <p class="footer-text">The Thurston Legacy Vault • NextHeir by Element United</p>
     </div>
 
-    <!-- MODALS -->
-
-    <!-- Add Heirloom Modal -->
-    <div class="modal-overlay" id="add-heirloom-modal">
+    <!-- Modals -->
+    <div class="modal-overlay" id="heirloom-detail-modal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">Add New Heirloom</div>
-                <button class="modal-close" onclick="closeModal('add-heirloom-modal')">×</button>
+                <div class="modal-title">The Tiffany Diamond</div>
+                <button class="modal-close" onclick="closeModal('heirloom-detail-modal')">×</button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Heirloom Name</label>
-                    <input type="text" class="form-input" placeholder="e.g., Grandmother's Wedding Ring">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Category</label>
-                    <select class="form-select">
-                        <option>Jewelry</option>
-                        <option>Timepiece</option>
-                        <option>Art</option>
-                        <option>Real Estate</option>
-                        <option>Heirloom</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Estimated Value</label>
-                    <input type="text" class="form-input" placeholder="$0.00">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Year Acquired</label>
-                    <input type="text" class="form-input" placeholder="e.g., 1965">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Story (Optional)</label>
-                    <textarea class="form-input" rows="4" placeholder="Tell us about this piece..."></textarea>
-                </div>
+                <p>This extraordinary diamond represents the 7th largest stone ever sold by Tiffany & Co. Its provenance traces through decades of careful stewardship, now being preserved for future generations through blockchain certification.</p>
+                <p>The White Glove Legacy Package ensures every facet of this heirloom's story—from its origins to its meaning within your family—is captured, verified, and immortalized.</p>
             </div>
             <div class="modal-footer">
-                <button class="secondary-btn" onclick="closeModal('add-heirloom-modal')">Cancel</button>
-                <button class="primary-btn" onclick="closeModal('add-heirloom-modal')">Add Heirloom</button>
+                <button class="secondary-btn" onclick="closeModal('heirloom-detail-modal')">Close</button>
+                <button class="primary-btn">View Full Record</button>
             </div>
         </div>
     </div>
 
-    <!-- Invite Family Modal -->
     <div class="modal-overlay" id="invite-modal">
         <div class="modal">
             <div class="modal-header">
@@ -1167,92 +1098,24 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Relationship</label>
-                    <select class="form-select">
-                        <option>Spouse</option>
-                        <option>Child</option>
-                        <option>Grandchild</option>
-                        <option>Sibling</option>
-                        <option>Other</option>
-                    </select>
+                    <input type="text" class="form-input" placeholder="e.g., Grandchild, Niece">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Access Level</label>
-                    <select class="form-select">
+                    <select class="form-input">
                         <option>View Only</option>
                         <option>Can Add Memories</option>
                         <option>Full Access</option>
-                        <option>Admin</option>
                     </select>
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="secondary-btn" onclick="closeModal('invite-modal')">Cancel</button>
-                <button class="primary-btn" onclick="closeModal('invite-modal')">Send Invite</button>
+                <button class="primary-btn">Send Invitation</button>
             </div>
         </div>
     </div>
 
-    <!-- Heirloom Detail Modal -->
-    <div class="modal-overlay" id="heirloom-detail-modal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">The Tiffany Diamond</div>
-                <button class="modal-close" onclick="closeModal('heirloom-detail-modal')">×</button>
-            </div>
-            <div class="modal-body">
-                <img src="dean_martin_ring.png" class="heirloom-detail-image" alt="Tiffany Diamond">
-                <div class="heirloom-detail-meta">
-                    <div class="heirloom-detail-item">
-                        <div class="heirloom-detail-label">Origin</div>
-                        <div class="heirloom-detail-value">Tiffany & Co.</div>
-                    </div>
-                    <div class="heirloom-detail-item">
-                        <div class="heirloom-detail-label">Est. Value</div>
-                        <div class="heirloom-detail-value">$1.5M</div>
-                    </div>
-                    <div class="heirloom-detail-item">
-                        <div class="heirloom-detail-label">Category</div>
-                        <div class="heirloom-detail-value">Jewelry</div>
-                    </div>
-                    <div class="heirloom-detail-item">
-                        <div class="heirloom-detail-label">Status</div>
-                        <div class="heirloom-detail-value" style="color: #0ABAB5;">In Certification</div>
-                    </div>
-                </div>
-                <p>The 7th largest diamond ever sold by Tiffany & Co., this extraordinary piece represents the inaugural white-glove legacy certification on NextHeir. Full provenance documentation in progress.</p>
-            </div>
-            <div class="modal-footer">
-                <button class="secondary-btn" onclick="closeModal('heirloom-detail-modal')">Close</button>
-                <button class="primary-btn" onclick="closeModal('heirloom-detail-modal')">Edit Details</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Interview Modal -->
-    <div class="modal-overlay" id="interview-modal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">Studio Interview</div>
-                <button class="modal-close" onclick="closeModal('interview-modal')">×</button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Status:</strong> Scheduled</p>
-                <p>Paul will conduct an in-studio interview to capture your story - the meaning behind the ring, the memories attached, the legacy you're preserving.</p>
-                <p>This session typically runs 60-90 minutes and will be edited into both your Heritage Documentary and Voice of Memory audio keepsake.</p>
-                <p><strong>What to prepare:</strong></p>
-                <p>• Any photos or documents related to the ring<br>
-                • Stories about when/how it was acquired<br>
-                • Memories of wearing or gifting the piece<br>
-                • What you want future generations to know</p>
-            </div>
-            <div class="modal-footer">
-                <button class="secondary-btn" onclick="closeModal('interview-modal')">Close</button>
-                <button class="primary-btn" onclick="closeModal('interview-modal')">Schedule Session</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Profile Modal -->
     <div class="modal-overlay" id="profile-modal">
         <div class="modal">
             <div class="modal-header">
@@ -1260,125 +1123,49 @@
                 <button class="modal-close" onclick="closeModal('profile-modal')">×</button>
             </div>
             <div class="modal-body">
-                <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div class="user-avatar" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1rem;">WT</div>
-                    <div style="font-size: 1.25rem; font-weight: 600;">Wright Thurston</div>
-                    <div style="color: #888; font-size: 0.875rem;">White Glove Member</div>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" value="Wright Thurston">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-input" value="wright@example.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Phone</label>
-                    <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+                    <input type="email" class="form-input" value="wright@thurston.com">
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="secondary-btn" onclick="closeModal('profile-modal')">Cancel</button>
-                <button class="primary-btn" onclick="closeModal('profile-modal')">Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Generic Service Modal -->
-    <div class="modal-overlay" id="service-modal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">Service Details</div>
-                <button class="modal-close" onclick="closeModal('service-modal')">×</button>
-            </div>
-            <div class="modal-body">
-                <p>This service is included in your White Glove Legacy Package.</p>
-                <p>Your dedicated team will reach out to schedule and coordinate all aspects of this service as part of your certification journey.</p>
-            </div>
-            <div class="modal-footer">
-                <button class="primary-btn" onclick="closeModal('service-modal')">Got It</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Family Member Modal -->
-    <div class="modal-overlay" id="family-member-modal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title">Family Member</div>
-                <button class="modal-close" onclick="closeModal('family-member-modal')">×</button>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div class="family-avatar" style="width: 80px; height: 80px; font-size: 2.5rem; margin: 0 auto 1rem;">👩</div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-input" placeholder="Family member name">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Relationship</label>
-                    <select class="form-select">
-                        <option>Spouse</option>
-                        <option>Child</option>
-                        <option>Grandchild</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Access Level</label>
-                    <select class="form-select">
-                        <option>Full Access</option>
-                        <option>Can Add Memories</option>
-                        <option>View Only</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="secondary-btn" onclick="closeModal('family-member-modal')">Cancel</button>
-                <button class="primary-btn" onclick="closeModal('family-member-modal')">Save</button>
+                <button class="primary-btn">Save Changes</button>
             </div>
         </div>
     </div>
 
     <script>
         function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.getElementById(tabName + '-tab').classList.add('active');
-            
-            // Update nav buttons
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.tab === tabName) {
-                    btn.classList.add('active');
-                }
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('active');
+                if (b.dataset.tab === tabName) b.classList.add('active');
             });
         }
 
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
         }
 
-        // Close modal when clicking overlay
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
+        document.querySelectorAll('.modal-overlay').forEach(o => {
+            o.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
             });
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                document.querySelectorAll('.modal-overlay.active').forEach(modal => {
-                    modal.classList.remove('active');
-                });
+                document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
             }
         });
     </script>
