@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextHeir - Wright Thurston Legacy Vault</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #FAF8F3;
+            color: #3E3E3E;
+        }
+
+        .sans {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #E8E3D8;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            background: #0ABAB5;
+            border-radius: 6px;
+        }
+
+        h1 {
+            color: #3E3E3E;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            color: #5A5A5A;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .user-greeting {
+            color: #3E3E3E;
+            font-size: 0.875rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0ABAB5 0%, #088F8B 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #5A5A5A;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .nav-btn:hover {
+            background: #F5F3EE;
+        }
+
+        .nav-btn.active {
+            background: #0ABAB5;
+            color: white;
+        }
+
+        /* WELCOME BANNER */
+        .welcome-banner {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(10, 186, 181, 0.15) 0%, transparent 60%);
+        }
+
+        .welcome-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-text h2 {
+            color: white;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            color: #0ABAB5;
+            font-size: 1rem;
+        }
+
+        .welcome-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .welcome-stat {
+            text-align: center;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .welcome-stat:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .welcome-stat-value {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .welcome-stat-label {
+            color: #888;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .metric-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .metric-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #5A5A5A;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #3E3E3E;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3E3E3E;
+        }
+
+        .primary-btn {
+            padding: 0.625rem 1.25rem;
+            background: #0ABAB5;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .primary-btn:hover {
+            background: #088F8B;
+            transform: translateY(-1px);
+        }
+
+        .secondary-btn {
+            padding: 0.625rem 1.25rem;
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 8px;
+            color: #3E3E3E;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .secondary-btn:hover {
+            background: #F5F3EE;
+        }
+
+        /* FEATURED HEIRLOOM */
+        .featured-heirloom {
+            background: white;
+            border: 2px solid #0ABAB5;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .featured-heirloom:hover {
+            box-shadow: 0 8px 24px rgba(10, 186, 181, 0.2);
+        }
+
+        .featured-heirloom-image {
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .featured-heirloom-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .featured-heirloom:hover .featured-heirloom-image img {
+            transform: scale(1.02);
+        }
+
+        .featured-heirloom-info {
+            padding: 2rem;
+        }
+
+        .featured-heirloom-badge {
+            display: inline-block;
+            background: #0ABAB5;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .featured-heirloom-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-heirloom-subtitle {
+            color: #0ABAB5;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .featured-heirloom-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .fh-meta-item {
+            text-align: left;
+        }
+
+        .fh-meta-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .fh-meta-value {
+            font-size: 1rem;
+            color: #3E3E3E;
+            font-weight: 600;
+        }
+
+        /* LEGACY PACKAGE STATUS */
+        .legacy-package {
+            background: #f9f9f7;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .legacy-package-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .legacy-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .legacy-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .legacy-item:hover {
+            background: rgba(10, 186, 181, 0.1);
+        }
+
+        .legacy-item-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .legacy-item-icon.complete {
+            background: #7D9B76;
+            color: white;
+        }
+
+        .legacy-item-icon.progress {
+            background: #0ABAB5;
+            color: white;
+        }
+
+        .legacy-item-icon.pending {
+            background: #E8E3D8;
+            color: #888;
+        }
+
+        .legacy-item-text {
+            color: #3E3E3E;
+        }
+
+        .legacy-item-status {
+            margin-left: auto;
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        /* FAMILY SECTION */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .family-member {
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .family-member:hover {
+            border-color: #0ABAB5;
+            box-shadow: 0 4px 12px rgba(10, 186, 181, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .family-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #E8E3D8 0%, #d5cfc3 100%);
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .family-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.25rem;
+        }
+
+        .family-relation {
+            font-size: 0.75rem;
+            color: #888;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .footer {
+            background: white;
+            border-top: 1px solid #E8E3D8;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer-text {
+            color: #5A5A5A;
+            font-style: italic;
+            font-size: 0.875rem;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #E8E3D8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #3E3E3E;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #F5F3EE;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: #5A5A5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #E8E3D8;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+            color: #5A5A5A;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #E8E3D8;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* FORM STYLES */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #3E3E3E;
+            margin-bottom: 0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #E8E3D8;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: Georgia, serif;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0ABAB5;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #E8E3D8;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* TIMELINE TAB */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #E8E3D8;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: #0ABAB5;
+            border-radius: 50%;
+            transform: translateX(-5px);
+        }
+
+        .timeline-item.pending::before {
+            background: #E8E3D8;
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.875rem;
+            color: #5A5A5A;
+        }
+
+        /* SERVICES TAB */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid #E8E3D8;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .service-card:hover {
+            border-color: #0ABAB5;
+            box-shadow: 0 4px 12px rgba(10, 186, 181, 0.15);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #3E3E3E;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-desc {
+            font-size: 0.875rem;
+            color: #5A5A5A;
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0ABAB5;
+        }
+
+        .service-included {
+            background: rgba(10, 186, 181, 0.1);
+            color: #0ABAB5;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        /* HEIRLOOM DETAIL MODAL */
+        .heirloom-detail-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .heirloom-detail-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .heirloom-detail-item {
+            background: #f9f9f7;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .heirloom-detail-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .heirloom-detail-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #3E3E3E;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section" onclick="switchTab('vault')" style="cursor:pointer">
+                <div class="logo"></div>
+                <div>
+                    <h1>NextHeir</h1>
+                    <div class="subtitle sans">Digital Legacy Preservation</div>
+                </div>
+            </div>
+            <div class="nav">
+                <button class="nav-btn active" data-tab="vault" onclick="switchTab('vault')">My Vault</button>
+                <button class="nav-btn" data-tab="family" onclick="switchTab('family')">Family</button>
+                <button class="nav-btn" data-tab="timeline" onclick="switchTab('timeline')">Timeline</button>
+                <button class="nav-btn" data-tab="services" onclick="switchTab('services')">Services</button>
+            </div>
+            <div class="user-section">
+                <div class="user-greeting">Welcome back, <span class="user-name">Wright</span></div>
+                <div class="user-avatar" onclick="openModal('profile-modal')">WT</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Banner -->
+    <div class="welcome-banner">
+        <div class="welcome-content">
+            <div class="welcome-text">
+                <h2>The Thurston Legacy Vault</h2>
+                <p>White Glove Collection • Est. 2026</p>
+            </div>
+            <div class="welcome-stats">
+                <div class="welcome-stat" onclick="switchTab('vault')">
+                    <div class="welcome-stat-value">$1.5M+</div>
+                    <div class="welcome-stat-label">Total Value</div>
+                </div>
+                <div class="welcome-stat" onclick="switchTab('vault')">
+                    <div class="welcome-stat-value">1</div>
+                    <div class="welcome-stat-label">Certified</div>
+                </div>
+                <div class="welcome-stat" onclick="switchTab('family')">
+                    <div class="welcome-stat-value">18</div>
+                    <div class="welcome-stat-label">Family Members</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- VAULT TAB -->
+        <div class="tab-content active" id="vault-tab">
+            <div class="section-header">
+                <h2 class="section-title">Featured Heirloom</h2>
+                <button class="primary-btn" onclick="openModal('add-heirloom-modal')">+ Add Heirloom</button>
+            </div>
+
+            <div class="featured-heirloom" onclick="openModal('heirloom-detail-modal')">
+                <div class="featured-heirloom-image">
+                    <img src="dean_martin_ring.png" alt="Tiffany Diamond Ring">
+                </div>
+                <div class="featured-heirloom-info">
+                    <div class="featured-heirloom-badge">White Glove • In Certification</div>
+                    <h3 class="featured-heirloom-title">The Tiffany Diamond</h3>
+                    <div class="featured-heirloom-subtitle">7th Largest Diamond Ever Sold by Tiffany & Co.</div>
+                    
+                    <div class="featured-heirloom-meta">
+                        <div class="fh-meta-item">
+                            <div class="fh-meta-label">Origin</div>
+                            <div class="fh-meta-value">Tiffany & Co.</div>
+                        </div>
+                        <div class="fh-meta-item">
+                            <div class="fh-meta-label">Est. Value</div>
+                            <div class="fh-meta-value">$1.5M</div>
+                        </div>
+                        <div class="fh-meta-item">
+                            <div class="fh-meta-label">Acquired</div>
+                            <div class="fh-meta-value">—</div>
+                        </div>
+                        <div class="fh-meta-item">
+                            <div class="fh-meta-label">Certification</div>
+                            <div class="fh-meta-value" style="color: #0ABAB5;">In Progress</div>
+                        </div>
+                    </div>
+
+                    <div class="legacy-package" onclick="event.stopPropagation();">
+                        <div class="legacy-package-title">White Glove Legacy Package</div>
+                        <div class="legacy-items">
+                            <div class="legacy-item" onclick="openModal('provenance-modal')">
+                                <div class="legacy-item-icon progress">◉</div>
+                                <span class="legacy-item-text">Provenance Documentation</span>
+                                <span class="legacy-item-status">In Progress</span>
+                            </div>
+                            <div class="legacy-item" onclick="openModal('interview-modal')">
+                                <div class="legacy-item-icon pending">○</div>
+                                <span class="legacy-item-text">Studio Interview</span>
+                                <span class="legacy-item-status">Scheduled</span>
+                            </div>
+                            <div class="legacy-item" onclick="openModal('story-modal')">
+                                <div class="legacy-item-icon pending">○</div>
+                                <span class="legacy-item-text">Story Capture</span>
+                                <span class="legacy-item-status">Pending</span>
+                            </div>
+                            <div class="legacy-item" onclick="openModal('documentary-modal')">
+                                <div class="legacy-item-icon pending">○</div>
+                                <span class="legacy-item-text">Heritage Documentary</span>
+                                <span class="legacy-item-status">Pending</span>
+                            </div>
+                            <div class="legacy-item" onclick="openModal('voice-modal')">
+                                <div class="legacy-item-icon pending">○</div>
+                                <span class="legacy-item-text">Voice of Memory</span>
+                                <span class="legacy-item-status">Pending</span>
+                            </div>
+                            <div class="legacy-item" onclick="openModal('certificate-modal')">
+                                <div class="legacy-item-icon pending">○</div>
+                                <span class="legacy-item-text">Blockchain Certificate</span>
+                                <span class="legacy-item-status">Final Step</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="section-header">
+                <h2 class="section-title">Vault Overview</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card" onclick="openModal('heirloom-detail-modal')">
+                    <div class="metric-icon">💎</div>
+                    <div class="metric-label">Heirlooms</div>
+                    <div class="metric-value">1</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">💭</div>
+                    <div class="metric-label">Memories</div>
+                    <div class="metric-value">—</div>
+                </div>
+                <div class="metric-card" onclick="switchTab('family')">
+                    <div class="metric-icon">👨‍👩‍👧‍👦</div>
+                    <div class="metric-label">Family Access</div>
+                    <div class="metric-value">18</div>
+                </div>
+                <div class="metric-card" onclick="switchTab('timeline')">
+                    <div class="metric-icon">📜</div>
+                    <div class="metric-label">Certificates</div>
+                    <div class="metric-value">In Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAMILY TAB -->
+        <div class="tab-content" id="family-tab">
+            <div class="section-header">
+                <h2 class="section-title">Family Vault Access</h2>
+                <button class="primary-btn" onclick="openModal('invite-modal')">+ Invite Family</button>
+            </div>
+
+            <div class="family-grid">
+                <div class="family-member" onclick="openModal('family-member-modal')">
+                    <div class="family-avatar">👩</div>
+                    <div class="family-name">Wife</div>
+                    <div class="family-relation">Spouse • Full Access</div>
+                </div>
+                <div class="family-member" onclick="openModal('family-member-modal')">
+                    <div class="family-avatar">👦</div>
+                    <div class="family-name">Son 1</div>
+                    <div class="family-relation">Child • Full Access</div>
+                </div>
+                <div class="family-member" onclick="openModal('family-member-modal')">
+                    <div class="family-avatar">👧</div>
+                    <div class="family-name">Daughter 1</div>
+                    <div class="family-relation">Child • Full Access</div>
+                </div>
+                <div class="family-member" onclick="openModal('family-member-modal')">
+                    <div class="family-avatar">👦</div>
+                    <div class="family-name">Son 2</div>
+                    <div class="family-relation">Child • Full Access</div>
+                </div>
+                <div class="family-member" onclick="openModal('family-member-modal')">
+                    <div class="family-avatar">👧</div>
+                    <div class="family-name">Daughter 2</div>
+                    <div class="family-relation">Child • Full Access</div>
+                </div>
+                <div class="family-member" onclick="openModal('invite-modal')" style="border-style: dashed;">
+                    <div class="family-avatar" style="background: #f5f5f5;">+</div>
+                    <div class="family-name">13 Grandchildren</div>
+                    <div class="family-relation">Tap to add</div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title">Access Settings</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">👁️</div>
+                    <div class="metric-label">View Only</div>
+                    <div class="metric-value">13</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">✏️</div>
+                    <div class="metric-label">Can Edit</div>
+                    <div class="metric-value">5</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">👑</div>
+                    <div class="metric-label">Admins</div>
+                    <div class="metric-value">2</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">📧</div>
+                    <div class="metric-label">Pending Invites</div>
+                    <div class="metric-value">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMELINE TAB -->
+        <div class="tab-content" id="timeline-tab">
+            <div class="section-header">
+                <h2 class="section-title">Legacy Timeline</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">December 2025</div>
+                    <div class="timeline-title">Vault Created</div>
+                    <div class="timeline-desc">The Thurston Legacy Vault was established on NextHeir.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">December 2025</div>
+                    <div class="timeline-title">Tiffany Diamond Added</div>
+                    <div class="timeline-desc">First heirloom registered for certification.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">December 2025</div>
+                    <div class="timeline-title">Provenance Research Begins</div>
+                    <div class="timeline-desc">Documentation gathering in progress.</div>
+                </div>
+                <div class="timeline-item pending">
+                    <div class="timeline-date">January 2026</div>
+                    <div class="timeline-title">Studio Interview</div>
+                    <div class="timeline-desc">Scheduled story capture session with Paul.</div>
+                </div>
+                <div class="timeline-item pending">
+                    <div class="timeline-date">January 2026</div>
+                    <div class="timeline-title">Heritage Documentary</div>
+                    <div class="timeline-desc">Video production of legacy story.</div>
+                </div>
+                <div class="timeline-item pending">
+                    <div class="timeline-date">February 14, 2026</div>
+                    <div class="timeline-title">Certificate Minted</div>
+                    <div class="timeline-desc">Blockchain verification complete. Valentine's Day launch.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICES TAB -->
+        <div class="tab-content" id="services-tab">
+            <div class="section-header">
+                <h2 class="section-title">Available Services</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" onclick="openModal('service-modal')">
+                    <div class="service-icon">📝</div>
+                    <div class="service-title">Story Capture</div>
+                    <div class="service-desc">Professional written narrative of your heirloom's journey.</div>
+                    <div class="service-included">Included in Package</div>
+                </div>
+                <div class="service-card" onclick="openModal('service-modal')">
+                    <div class="service-icon">🎥</div>
+                    <div class="service-title">Studio Interview</div>
+                    <div class="service-desc">In-person video recording session capturing your story.</div>
+                    <div class="service-included">Included in Package</div>
+                </div>
+                <div class="service-card" onclick="openModal('service-modal')">
+                    <div class="service-icon">🎬</div>
+                    <div class="service-title">Heritage Documentary</div>
+                    <div class="service-desc">60-90 second museum-quality documentary.</div>
+                    <div class="service-included">Included in Package</div>
+                </div>
+                <div class="service-card" onclick="openModal('service-modal')">
+                    <div class="service-icon">🎙️</div>
+                    <div class="service-title">Voice of Memory</div>
+                    <div class="service-desc">Audio keepsake preserving the voice behind the story.</div>
+                    <div class="service-included">Included in Package</div>
+                </div>
+                <div class="service-card" onclick="openModal('service-modal')">
+                    <div class="service-icon">🔗</div>
+                    <div class="service-title">Blockchain Certificate</div>
+                    <div class="service-desc">Permanent, verifiable provenance on the blockchain.</div>
+                    <div class="service-included">Included in Package</div>
+                </div>
+                <div class="service-card" onclick="openModal('service-modal')">
+                    <div class="service-icon">🖼️</div>
+                    <div class="service-title">Photo Restoration</div>
+                    <div class="service-desc">Archival restoration of historical photographs.</div>
+                    <div class="service-price">$100 - $400</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="footer-text">
+            The Thurston Legacy • Preserved Forever on NextHeir
+        </p>
+    </div>
+
+    <!-- MODALS -->
+
+    <!-- Add Heirloom Modal -->
+    <div class="modal-overlay" id="add-heirloom-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Add New Heirloom</div>
+                <button class="modal-close" onclick="closeModal('add-heirloom-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Heirloom Name</label>
+                    <input type="text" class="form-input" placeholder="e.g., Grandmother's Wedding Ring">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select">
+                        <option>Jewelry</option>
+                        <option>Timepiece</option>
+                        <option>Art</option>
+                        <option>Real Estate</option>
+                        <option>Heirloom</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estimated Value</label>
+                    <input type="text" class="form-input" placeholder="$0.00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Year Acquired</label>
+                    <input type="text" class="form-input" placeholder="e.g., 1965">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Story (Optional)</label>
+                    <textarea class="form-input" rows="4" placeholder="Tell us about this piece..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="closeModal('add-heirloom-modal')">Cancel</button>
+                <button class="primary-btn" onclick="closeModal('add-heirloom-modal')">Add Heirloom</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invite Family Modal -->
+    <div class="modal-overlay" id="invite-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Invite Family Member</div>
+                <button class="modal-close" onclick="closeModal('invite-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="family@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Relationship</label>
+                    <select class="form-select">
+                        <option>Spouse</option>
+                        <option>Child</option>
+                        <option>Grandchild</option>
+                        <option>Sibling</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Access Level</label>
+                    <select class="form-select">
+                        <option>View Only</option>
+                        <option>Can Add Memories</option>
+                        <option>Full Access</option>
+                        <option>Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="closeModal('invite-modal')">Cancel</button>
+                <button class="primary-btn" onclick="closeModal('invite-modal')">Send Invite</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Heirloom Detail Modal -->
+    <div class="modal-overlay" id="heirloom-detail-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">The Tiffany Diamond</div>
+                <button class="modal-close" onclick="closeModal('heirloom-detail-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <img src="dean_martin_ring.png" class="heirloom-detail-image" alt="Tiffany Diamond">
+                <div class="heirloom-detail-meta">
+                    <div class="heirloom-detail-item">
+                        <div class="heirloom-detail-label">Origin</div>
+                        <div class="heirloom-detail-value">Tiffany & Co.</div>
+                    </div>
+                    <div class="heirloom-detail-item">
+                        <div class="heirloom-detail-label">Est. Value</div>
+                        <div class="heirloom-detail-value">$1.5M</div>
+                    </div>
+                    <div class="heirloom-detail-item">
+                        <div class="heirloom-detail-label">Category</div>
+                        <div class="heirloom-detail-value">Jewelry</div>
+                    </div>
+                    <div class="heirloom-detail-item">
+                        <div class="heirloom-detail-label">Status</div>
+                        <div class="heirloom-detail-value" style="color: #0ABAB5;">In Certification</div>
+                    </div>
+                </div>
+                <p>The 7th largest diamond ever sold by Tiffany & Co., this extraordinary piece represents the inaugural white-glove legacy certification on NextHeir. Full provenance documentation in progress.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="closeModal('heirloom-detail-modal')">Close</button>
+                <button class="primary-btn" onclick="closeModal('heirloom-detail-modal')">Edit Details</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interview Modal -->
+    <div class="modal-overlay" id="interview-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Studio Interview</div>
+                <button class="modal-close" onclick="closeModal('interview-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Status:</strong> Scheduled</p>
+                <p>Paul will conduct an in-studio interview to capture your story - the meaning behind the ring, the memories attached, the legacy you're preserving.</p>
+                <p>This session typically runs 60-90 minutes and will be edited into both your Heritage Documentary and Voice of Memory audio keepsake.</p>
+                <p><strong>What to prepare:</strong></p>
+                <p>• Any photos or documents related to the ring<br>
+                • Stories about when/how it was acquired<br>
+                • Memories of wearing or gifting the piece<br>
+                • What you want future generations to know</p>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="closeModal('interview-modal')">Close</button>
+                <button class="primary-btn" onclick="closeModal('interview-modal')">Schedule Session</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal-overlay" id="profile-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Account Settings</div>
+                <button class="modal-close" onclick="closeModal('profile-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <div class="user-avatar" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1rem;">WT</div>
+                    <div style="font-size: 1.25rem; font-weight: 600;">Wright Thurston</div>
+                    <div style="color: #888; font-size: 0.875rem;">White Glove Member</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" value="wright@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="closeModal('profile-modal')">Cancel</button>
+                <button class="primary-btn" onclick="closeModal('profile-modal')">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic Service Modal -->
+    <div class="modal-overlay" id="service-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Service Details</div>
+                <button class="modal-close" onclick="closeModal('service-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p>This service is included in your White Glove Legacy Package.</p>
+                <p>Your dedicated team will reach out to schedule and coordinate all aspects of this service as part of your certification journey.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="primary-btn" onclick="closeModal('service-modal')">Got It</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Family Member Modal -->
+    <div class="modal-overlay" id="family-member-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Family Member</div>
+                <button class="modal-close" onclick="closeModal('family-member-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <div class="family-avatar" style="width: 80px; height: 80px; font-size: 2.5rem; margin: 0 auto 1rem;">👩</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" placeholder="Family member name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Relationship</label>
+                    <select class="form-select">
+                        <option>Spouse</option>
+                        <option>Child</option>
+                        <option>Grandchild</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Access Level</label>
+                    <select class="form-select">
+                        <option>Full Access</option>
+                        <option>Can Add Memories</option>
+                        <option>View Only</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="closeModal('family-member-modal')">Cancel</button>
+                <button class="primary-btn" onclick="closeModal('family-member-modal')">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking overlay
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
